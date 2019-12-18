@@ -44,31 +44,7 @@ namespace emp_management
                 app.UseDeveloperExceptionPage();
             }
 
-            //app.Use(async (context, next) =>
-            //{
-            //    logger.LogInformation("MW1: Incoming request");
-            //    //await context.Response.WriteAsync("Hello World!");
-            //    await context.Response
-            //    .WriteAsync(System.Diagnostics.Process.GetCurrentProcess().ProcessName + "\n");
-            //    await context.Response
-            //    .WriteAsync(_config["MyKey"].ToString() + "\n");
-            //    await context.Response
-            //    .WriteAsync(_config["YourKey"].ToString() + "\n");
 
-            //    await next();
-            //    logger.LogInformation("MW1: Outgoing request");
-
-            //});
-
-            //app.Use(async (context, next) =>
-            //{
-            //    logger.LogInformation("MW2: Incoming request");
-            //    //await context.Response.WriteAsync("Hello World!");
-
-            //    await next();
-            //    logger.LogInformation("MW2: Outgoing request");
-
-            //});
 
             DefaultFilesOptions defaultFilesOptions = new DefaultFilesOptions();
             //defaultFilesOptions.DefaultFileNames.Clear();

@@ -20,3 +20,4 @@ C:\projects\NETCORE\emp_management\emp_management\obj\Debug\netcoreapp2.2\Razor\
 C:\projects\NETCORE\emp_management\emp_management\obj\Debug\netcoreapp2.2\emp_management.RazorTargetAssemblyInfo.cs
 C:\projects\NETCORE\emp_management\emp_management\obj\Debug\netcoreapp2.2\emp_management.Views.pdb
 C:\projects\NETCORE\emp_management\emp_management\obj\Debug\netcoreapp2.2\emp_management.csproj.CopyComplete
+C:\projects\NETCORE\emp_management\emp_management\obj\Debug\netcoreapp2.2\Razor\Views\Home\Index.g.cshtml.cs

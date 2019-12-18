@@ -18,12 +18,11 @@ namespace emp_management.Controllers
         }
 
         //public JsonResult Index()
-        public string Index()
+        public ViewResult Index()
         {
-            //return "Hello from MVC";
-            //return Json(new { id = 1, name = "atip" });
-            return _employeeRepository.GetEmployee(1).Name;
-
+            IEnumerable<Employee> employees;
+            employees = _employeeRepository.GetAllEmployee();
+            return View(employees);
         }
         public ViewResult Details()
         {
@@ -33,20 +32,14 @@ namespace emp_management.Controllers
             HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
             {
 
-                Employee = _employeeRepository.GetEmployee(1),
+                Employee = em,
+                PageTitle = "Emp Details"               
 
-                PageTitle = "Emp Details"
             };
-        
-
             //return "Hello from MVC";
             //return Json(new { id = 1, name = "atip" });
-
-            
-            
             //ViewBag.Employee = em;
             //ViewData["PageTitle"] = "Emp Details";
-
             //return new ObjectResult(em);
             return View(homeDetailsViewModel);
 
