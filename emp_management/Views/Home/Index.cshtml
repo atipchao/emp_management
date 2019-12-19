@@ -3,25 +3,21 @@
     
     ViewBag.Title = "Emp. List";
 }
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Dept.</th>
-                    <th>Email</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach(var emp in Model)
-                {
-                <tr>
-                    <td>@emp.Id</td>
-                    <td>@emp.Name</td>
-                    <td>@emp.Department</td>
-                    <td>@emp.Email</td>
-                </tr>
-                }
-            </tbody>
-        </table>
+<div class="card-deck">
+    @foreach ( var emp in Model )
+    {
+        <div class="card m-3" >
+            <div class="card-header">
+                <h3>@emp.Name</h3>
+            </div>
+            <img class="card-img-top small"  src="~/images/shock.png"/>
+            <div class="card-footer text-center">
+                <a href="#" class="btn btn-primary">View</a>
+                <a href="#" class="btn btn-primary">Edit</a>
+                <a href="#" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
 
+    }
+
+</div>
