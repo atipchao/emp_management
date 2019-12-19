@@ -23,3 +23,4 @@ C:\projects\NETCORE\emp_management\emp_management\bin\Debug\netcoreapp2.2\emp_ma
 C:\projects\NETCORE\emp_management\emp_management\obj\Debug\netcoreapp2.2\emp_management.Views.pdb
 C:\projects\NETCORE\emp_management\emp_management\obj\Debug\netcoreapp2.2\emp_management.csproj.CopyComplete
 C:\projects\NETCORE\emp_management\emp_management\obj\Debug\netcoreapp2.2\emp_management.csprojAssemblyReference.cache
+C:\projects\NETCORE\emp_management\emp_management\obj\Debug\netcoreapp2.2\Razor\Views\_ViewStart.g.cshtml.cs
