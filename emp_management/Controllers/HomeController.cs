@@ -36,11 +36,7 @@ namespace emp_management.Controllers
                 PageTitle = "Emp Details"               
 
             };
-            //return "Hello from MVC";
-            //return Json(new { id = 1, name = "atip" });
-            //ViewBag.Employee = em;
-            //ViewData["PageTitle"] = "Emp Details";
-            //return new ObjectResult(em);
+
             return View(homeDetailsViewModel);
 
         }
