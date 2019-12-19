@@ -18,17 +18,19 @@ namespace emp_management.Controllers
         }
 
         //public JsonResult Index()
+        
         public ViewResult Index()
         {
             IEnumerable<Employee> employees;
             employees = _employeeRepository.GetAllEmployee();
             return View(employees);
         }
-        public ViewResult Details(int id)
+        
+        public ViewResult Details(int? id)
         {
             Employee em = new Employee();
 
-            em = _employeeRepository.GetEmployee(id);
+            em = _employeeRepository.GetEmployee(id??1);
             HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
             {
 

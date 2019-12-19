@@ -56,12 +56,12 @@ namespace emp_management
             //app.UseFileServer();
 
             app.UseStaticFiles();
-            //app.UseMvcWithDefaultRoute();
-            app.UseMvc(routes => {
-                routes.MapRoute("default", "{controller=Home}/{action=index}/{id=1}");
-            });
-            
+            app.UseMvcWithDefaultRoute();
+            //app.UseMvc(routes => {
+            //    routes.MapRoute("default", "{controller=Home}/{action=index}/{id=1}");
+            //});
 
+            //app.UseMvc();
             //app.Run(async (context) =>
             //{
             //    // throw new Exception("Some error occured");
@@ -77,7 +77,7 @@ namespace emp_management
 
             //});
 
-          
+
 
         }
     }
