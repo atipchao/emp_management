@@ -25,3 +25,4 @@ C:\projects\NETCORE\emp_management\emp_management\obj\Debug\netcoreapp2.2\emp_ma
 C:\projects\NETCORE\emp_management\emp_management\obj\Debug\netcoreapp2.2\Razor\Views\_ViewStart.g.cshtml.cs
 C:\projects\NETCORE\emp_management\emp_management\obj\Debug\netcoreapp2.2\Razor\Views\Home\_ViewStart.g.cshtml.cs
 C:\projects\NETCORE\emp_management\emp_management\obj\Debug\netcoreapp2.2\Razor\Views\_ViewImports.g.cshtml.cs
+C:\projects\NETCORE\emp_management\emp_management\obj\Debug\netcoreapp2.2\emp_management.csprojAssemblyReference.cache
