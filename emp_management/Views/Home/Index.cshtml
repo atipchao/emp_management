@@ -10,7 +10,7 @@
             <div class="card-header">
                 <h3>@emp.Name</h3>
             </div>
-            <img class="card-img-top small"  src="~/images/Answer.png"/>
+            <img class="card-img-top small"  src="~/images/Answer.png" asp-append-version="true"/>
             <div class="card-footer text-center">
                 <a asp-controller="home" asp-action="details" asp-route-id="@emp.Id" class="btn btn-primary">View</a>
                 <a asp-controller="home" asp-action="edit" asp-route-id="@emp.Id" class="btn btn-primary">Edit</a>
