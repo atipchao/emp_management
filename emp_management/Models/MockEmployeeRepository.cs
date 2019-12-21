@@ -20,6 +20,15 @@ namespace emp_management.Models
             };
         }
 
+        public Employee Add(Employee employee)
+        {
+            //throw new NotImplementedException();
+            employee.Id =  _employeeList.Max(a => a.Id) + 1;
+            _employeeList.Add(employee); 
+            return employee;
+
+        }
+
         public IEnumerable<Employee> GetAllEmployee()
         {
             return (_employeeList);

@@ -41,9 +41,19 @@ namespace emp_management.Controllers
 
             return View(homeDetailsViewModel);
         }
+        [HttpGet]
         public ViewResult Create()
         {
             return View();
+        }
+
+        [HttpPost]
+        public RedirectToActionResult Create(Employee emp)
+        {
+            Employee newEmp;
+            newEmp = _employeeRepository.Add(emp);
+            //return View(newEmp);
+            return RedirectToAction("details", new { id = newEmp.Id });
         }
     }
 }
