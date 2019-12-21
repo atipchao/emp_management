@@ -40,7 +40,10 @@ namespace emp_management.Controllers
             };
 
             return View(homeDetailsViewModel);
-
+        }
+        public ViewResult Create()
+        {
+            return View();
         }
     }
 }
