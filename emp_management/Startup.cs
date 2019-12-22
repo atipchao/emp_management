@@ -17,9 +17,9 @@ namespace emp_management
     {
         private IConfiguration _config;
 
-        public Startup(IConfiguration aa)
+        public Startup(IConfiguration config)
         {
-            _config = aa;
+            _config = config;
         }
 
         public int MyTestFunc()
@@ -34,7 +34,9 @@ namespace emp_management
         {
             services.AddDbContextPool<AppDbContext>(opt => opt.UseSqlServer(_config.GetConnectionString("EmpDBConnection")));
             services.AddMvc().AddXmlSerializerFormatters();
-            services.AddSingleton<IEmployeeRepository, MockEmployeeRepository>();
+            //services.AddSingleton<IEmployeeRepository, MockEmployeeRepository>();
+            // always use "AddScoped" when connecting to Database server - it pulls new data all the time.
+            services.AddScoped<IEmployeeRepository, SQLEmployeeRepository>();
         }
 
 
@@ -53,17 +55,21 @@ namespace emp_management
             //app.UseFileServer();
 
             app.UseStaticFiles();
-            //app.UseMvcWithDefaultRoute();
+            app.UseMvcWithDefaultRoute();
 
             //app.UseMvc(routes => {
             //    routes.MapRoute("default", "company/{controller=Home}/{action=Index}/{id?}" );
             //});
 
+            //app.UseMvc(routes => {
+            //    routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
+            //});
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute("default", "{controller=Home}/{action=index}/{id=1}");
-            });
+
+            //app.UseMvc(routes =>
+            //{
+            //    routes.MapRoute("default", "{controller=Home}/{action=index}/{id=1}");
+            //});
 
             //app.UseMvc();
 

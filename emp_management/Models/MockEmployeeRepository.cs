@@ -54,7 +54,13 @@ namespace emp_management.Models
 
         public Employee Update(Employee employeeChange)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            Employee TargetEmp = _employeeList.FirstOrDefault(e => e.Id == employeeChange.Id);
+            if (TargetEmp != null)
+            {
+                TargetEmp = employeeChange;
+            }
+            return (TargetEmp);
         }
     }
 }

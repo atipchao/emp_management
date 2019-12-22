@@ -9,10 +9,11 @@ namespace emp_management.Models
     public class AppDbContext : DbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) 
-            : base()
+            : base(options)
         {
 
         }
+        //public DbSet<Employee> Employees { get; set; }
         public DbSet<Employee> Employees { get; set; }
     }
 }

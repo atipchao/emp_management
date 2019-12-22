@@ -18,6 +18,13 @@ namespace emp_management.Models
         public Employee Add(Employee employee)
         {
             //throw new NotImplementedException();
+            //Employee TempEmp = new Employee
+            //{
+            //    Name = employee.Name,
+            //    Email = employee.Email,
+            //    Department = employee.Department
+            //};
+            //context.Employees.Add(TempEmp);
             context.Employees.Add(employee);
             context.SaveChanges();
             return (employee);
@@ -29,7 +36,7 @@ namespace emp_management.Models
         {
             //throw new NotImplementedException();
             Employee emp = context.Employees.Find(Id);
-            if(emp != null)
+            if (emp != null)
             {
                 context.Employees.Remove(emp);
             }
@@ -54,12 +61,25 @@ namespace emp_management.Models
         {
             //throw new NotImplementedException();
             Employee TargetEmp = context.Employees.FirstOrDefault(t => t.Id == employeeChange.Id);
-            if(TargetEmp != null)
+            if (TargetEmp != null)
             {
                 TargetEmp = employeeChange;
                 context.SaveChanges();
+                return (TargetEmp);
             }
-            return (TargetEmp);
+            else
+            {
+                return null;
+            }           
+
+        }
+
+        public Employee UpdateNewWay(Employee employeeChange)
+        {
+            var emp = context.Employees.Attach(employeeChange);
+            emp.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            context.SaveChanges();
+            return employeeChange;
         }
     }
 }
