@@ -56,24 +56,17 @@ namespace emp_management
 
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
-
             //app.UseMvc(routes => {
             //    routes.MapRoute("default", "company/{controller=Home}/{action=Index}/{id?}" );
             //});
-
             //app.UseMvc(routes => {
             //    routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
             //});
-
-
             //app.UseMvc(routes =>
             //{
             //    routes.MapRoute("default", "{controller=Home}/{action=index}/{id=1}");
             //});
-
             //app.UseMvc();
-
-
 
         }
     }
