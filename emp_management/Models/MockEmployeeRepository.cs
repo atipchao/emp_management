@@ -29,6 +29,18 @@ namespace emp_management.Models
 
         }
 
+        public Employee Delete(int Id)
+        {
+            //throw new NotImplementedException();
+            Employee TargetEmp = _employeeList.FirstOrDefault(e => e.Id == Id);
+            if (TargetEmp != null)
+            {
+                _employeeList.Remove(TargetEmp);
+            }
+            return (TargetEmp);
+
+        }
+
         public IEnumerable<Employee> GetAllEmployee()
         {
             return (_employeeList);
@@ -38,6 +50,11 @@ namespace emp_management.Models
         {
             //throw new NotImplementedException();
             return _employeeList.FirstOrDefault(a => a.Id == Id);
+        }
+
+        public Employee Update(Employee employeeChange)
+        {
+            throw new NotImplementedException();
         }
     }
 }
