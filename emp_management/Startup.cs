@@ -47,11 +47,6 @@ namespace emp_management
 
 
             DefaultFilesOptions defaultFilesOptions = new DefaultFilesOptions();
-            //defaultFilesOptions.DefaultFileNames.Clear();
-            //defaultFilesOptions.DefaultFileNames.Add("foo.html");
-
-
-            //app.UseDefaultFiles(defaultFilesOptions);
 
             //app.UseFileServer();
 
@@ -69,20 +64,6 @@ namespace emp_management
             });
 
             //app.UseMvc();
-            //app.Run(async (context) =>
-            //{
-            //    // throw new Exception("Some error occured");
-            //    //await context.Response.WriteAsync("MW3: Outgoing request");
-            //    //await context.Response
-            //    //.WriteAsync(System.Diagnostics.Process.GetCurrentProcess().ProcessName + "\n") ;
-            //    //await context.Response
-            //    //.WriteAsync(_config["MyKey"].ToString() + "\n");
-            //    //await context.Response
-            //    //.WriteAsync(_config["YourKey"].ToString());
-            //    //logger.LogInformation("MW3: Outgoing request");
-            //    await context.Response.WriteAsync("Hosting Evn: " + env.EnvironmentName.ToUpper());
-
-            //});
 
 
 
