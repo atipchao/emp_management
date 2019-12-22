@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20191222220631_addPhotoPath.cs" />
+    <Compile Remove="Migrations\20191222220631_addPhotoPath.Designer.cs" />
+    <Compile Remove="Migrations\20191222222009_addPhotopath.cs" />
+    <Compile Remove="Migrations\20191222222009_addPhotopath.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
   </ItemGroup>
