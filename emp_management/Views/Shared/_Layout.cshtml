@@ -33,15 +33,39 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a asp-action="index" asp-controller="home" class="nav-link">List</a>
-                    </li>
-                    <li class="nav-item">
-                        <a asp-action="create" asp-controller="home" class="nav-link">Create</a>
-                    </li>
-
-                </ul>
+                <div class="dropdown">
+                    <button class="btn-dark dropdown-toggle" type="button" data-toggle="dropdown">
+                        Employee
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a asp-action="index" asp-controller="home" class="nav-link">Emp. List</a></li>
+                        <li><a asp-action="create" asp-controller="home" class="nav-link">Emp. Create</a></li>
+                        <li><a asp-action="create" asp-controller="home" class="nav-link">Emp. Edit</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown">
+                    <button class="btn-dark dropdown-toggle" type="button" data-toggle="dropdown">
+                        Customer
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a asp-action="index" asp-controller="home" class="nav-link">Cust. List</a></li>
+                        <li><a asp-action="create" asp-controller="home" class="nav-link">Cust. Create</a></li>
+                        <li><a asp-action="create" asp-controller="home" class="nav-link">Cust. Edit</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown">
+                    <button class="btn-dark dropdown-toggle" type="button" data-toggle="dropdown">
+                        Inventory
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a asp-action="index" asp-controller="home" class="nav-link">Inv. List</a></li>
+                        <li><a asp-action="create" asp-controller="home" class="nav-link">Inv. Create</a></li>
+                        <li><a asp-action="create" asp-controller="home" class="nav-link">Inv. Edit</a></li>
+                    </ul>
+                </div>
             </div>
         </nav>
         <div>
