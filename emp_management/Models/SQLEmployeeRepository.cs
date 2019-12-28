@@ -13,7 +13,7 @@ namespace emp_management.Models
             this.context = context;
         }
 
-        public AppDbContext Context { get; }
+       // public AppDbContext Context { get; }
 
         public Employee Add(Employee employee)
         {

@@ -1,0 +1,41 @@
+﻿@model CustomerDetailsViweModel
+
+@{
+
+    ViewBag.Title = "Cus. Details";
+    var photoPath = "~/images/" + (Model.customer.PhotoPath ?? "shock.png");
+}
+
+<h3>@Model.PageTitle</h3>
+
+@{
+    //var emp = ViewData["Employee"] as emp_management.Models.Employee;
+
+}
+
+<div class="row justify-content-center" m-3>
+    <div class="col-sm-8">
+        <div class="card">
+            <div class="card-header">
+                <h1>@Model.customer.Name</h1>
+            </div>
+            <div class="card-body text-center">
+                <img class="card-img-top imageThumbnail" src=@photoPath asp-append-version="true" />
+                <h4>Cus ID : @Model.customer.Id</h4>
+                <h4>Email : @Model.customer.Email</h4>
+                <h4>Class : @Model.customer.MemberType</h4>
+            </div>
+            <div class="card-footer text-center">
+
+                <a asp-controller="home" asp-action="index" class="btn btn-primary">Back</a>
+                <a href="#" class="btn btn-primary">Edit</a>
+                <a href="#" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts{
+    <script src="~/js/CustomScript.js"></script>
+}

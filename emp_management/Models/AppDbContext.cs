@@ -15,6 +15,7 @@ namespace emp_management.Models
         }
         //public DbSet<Employee> Employees { get; set; }
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<Customer> Customers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

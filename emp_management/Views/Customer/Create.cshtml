@@ -1,0 +1,82 @@
+﻿@model CusCreateViewModel
+@*@inject IEmployeeRepository _empRepository*@
+
+@{
+    ViewBag.Title = "Create  Customer";
+}
+<h3>Create Customer</h3>
+<form enctype="multipart/form-data" asp-controller="customer" asp-action="create" method="post" class="mt-3">
+    <div class="form-group row">
+        <label asp-for="Name" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Email" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input class="form-control" asp-for="Email" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="membertype" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <select class="custom-select mr-sm-2" asp-for="membertype" asp-items="Html.GetEnumSelectList<MemberType>()"></select>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Photos" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <div class="custom-file">
+                <input multiple class="form-control custom-file-input" asp-for="Photos" />
+                <label class="custom-file-label">Choose File..</label>
+            </div>
+        </div>
+    </div>
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group row">
+        <div class="col-sm-10">
+            <button class="btn-primary m-1" type="submit">Create</button>
+        </div>
+    </div>
+
+
+    @*<div class="form-group row">
+            <div class="col-sm-10">
+                Total Emp Count = @_empRepository.GetAllEmployee().Count().ToString()
+            </div>
+        </div>*@
+
+    @section Scripts {
+        <script>
+            $(document).ready(function () {
+                $('.custom-file-input').on("change", function () {
+                    //console.log($(this));
+                    console.log("Step1");
+                    var fileLabel = $(this).next('.custom-file-label');
+                    console.log("Step2");
+                    var files = $(this)[0].files;
+                    console.log("Step3");
+                    if (files.length > 1) {
+                        console.log("Step4");
+                        fileLabel.html(files.length + "files selected");
+                    } else if (files.length == 1) {
+                        console.log("Step5");
+                        fileLabel.html(files[0].name);
+                    }
+                    console.log("Step6");
+                    //var FileName = $(this).val().split("\\").pop();
+                    //$(this).next('.custom-file-label').html(FileName);
+                    //console.log(FileName);
+                })
+            });
+
+        </script>
+
+    }
+
+
+</form>

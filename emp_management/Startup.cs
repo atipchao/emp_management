@@ -37,6 +37,7 @@ namespace emp_management
             //services.AddSingleton<IEmployeeRepository, MockEmployeeRepository>();
             // always use "AddScoped" when connecting to Database server - it pulls new data all the time.
             services.AddScoped<IEmployeeRepository, SQLEmployeeRepository>();
+            services.AddScoped<ICustomerRepository, SQLCustomerRepository>();
         }
 
 
@@ -56,17 +57,6 @@ namespace emp_management
 
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
-            //app.UseMvc(routes => {
-            //    routes.MapRoute("default", "company/{controller=Home}/{action=Index}/{id?}" );
-            //});
-            //app.UseMvc(routes => {
-            //    routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
-            //});
-            //app.UseMvc(routes =>
-            //{
-            //    routes.MapRoute("default", "{controller=Home}/{action=index}/{id=1}");
-            //});
-            //app.UseMvc();
 
         }
     }
