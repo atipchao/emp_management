@@ -59,3 +59,4 @@ C:\Users\HPz400\projects\emp_management\emp_management\obj\Debug\netcoreapp2.2\R
 C:\Users\HPz400\projects\emp_management\emp_management\obj\Debug\netcoreapp2.2\Razor\Views\Customer\Details.g.cshtml.cs
 C:\Users\HPz400\projects\emp_management\emp_management\obj\Debug\netcoreapp2.2\Razor\Views\Customer\Index.g.cshtml.cs
 C:\Users\HPz400\projects\emp_management\emp_management\obj\Debug\netcoreapp2.2\emp_management.csprojAssemblyReference.cache
+C:\Users\HPz400\projects\emp_management\emp_management\obj\Debug\netcoreapp2.2\Razor\Views\Home\Edit.g.cshtml.cs
