@@ -36,6 +36,12 @@ namespace emp_management.Controllers
             Employee em = new Employee();
 
             em = _employeeRepository.GetEmployee(id ?? 1);
+
+            if(em == null)
+            {
+                Response.StatusCode = 404;
+                return View("EmployeeNotFound", id.Value);
+            }
             HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
             {
 
@@ -108,6 +114,83 @@ namespace emp_management.Controllers
                 ExistingPhotoPath = employee.PhotoPath
             };
             return View(empEditViewModel);
+        }
+
+        [HttpPost]
+        //public RedirectToActionResult Create(Employee emp)
+        public ActionResult Edit(EmpEditViewModel emp)
+        {
+            // get the target emp
+            
+            if (ModelState.IsValid)
+            {
+                string uniqueFilename = null;
+                if (emp.Photos != null && emp.Photos.Count > 0)
+                {
+                    foreach (IFormFile photo in emp.Photos)
+                    {
+                        string uploadFolder = Path.Combine(_hostingEnvironment.WebRootPath, "images");
+                        uniqueFilename = Guid.NewGuid().ToString() + "_" + photo.FileName;
+                        string filePath = Path.Combine(uploadFolder, uniqueFilename);
+                        photo.CopyTo(new FileStream(filePath, FileMode.Create));
+                    }
+                }
+                try
+                {
+
+
+                    Employee targetEmp = _employeeRepository.GetEmployee(emp.Id);
+                    targetEmp.Name = emp.Name;
+                    targetEmp.Email = emp.Email;
+                    targetEmp.Department = emp.Department;
+                    if (uniqueFilename != null)
+                    {
+                        // remove old image..
+                        if (emp.Photos != null)
+                        {
+                            string OldImagePath = Path.Combine(_hostingEnvironment.WebRootPath, "images", emp.ExistingPhotoPath);
+                            // Delete file
+                            System.IO.File.Delete(OldImagePath);
+                        }
+                            
+                        targetEmp.PhotoPath = uniqueFilename;
+                    }
+                    _employeeRepository.Update(targetEmp);
+                    
+                    
+
+                }
+                catch (Exception e)
+                {
+                    Response.Redirect("error.html");
+                }
+                return RedirectToAction("details", new { id = emp.Id});
+            }
+            else
+            {
+                //return RedirectToAction("create", emp);
+                return View();
+            }
+        }
+
+        [HttpGet]
+        public ViewResult Delete(int id)
+        {
+            //Get the selected Emp
+            Employee employee = _employeeRepository.GetEmployee(id);
+            HomeDetailsViewModel DeleteDetailsViewModel = new HomeDetailsViewModel()
+            {
+                Employee = employee,
+                PageTitle = "Emp Delete Details"
+            };
+            return View(DeleteDetailsViewModel);
+        }
+
+        [HttpPost]
+        public ViewResult Delete(Employee emp)
+        {
+            //return RedirectToAction("Index",null);
+            return View();
         }
     }
 }

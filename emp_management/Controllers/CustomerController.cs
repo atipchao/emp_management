@@ -94,5 +94,71 @@ namespace emp_management.Controllers
 
         }
 
+        [HttpGet]
+        public ViewResult Edit(int id)
+        {
+            Customer customer = _customerRepository.GetCustomer(id);
+            CusEditViewModel cusEditViewModel = new CusEditViewModel()
+            {
+                Id = customer.Id,
+                Name = customer.Name,
+                Email = customer.Email,
+                membertype = customer.MemberType,
+                ExistingPhotoPath = customer.PhotoPath
+            };
+            return View(cusEditViewModel);
+        }
+
+        [HttpPost]
+        //public RedirectToActionResult Create(Employee emp)
+        public ActionResult Edit(CusEditViewModel cus)
+        {
+            // get the target emp
+
+            if (ModelState.IsValid)
+            {
+                string uniqueFilename = null;
+                if (cus.Photos != null && cus.Photos.Count > 0)
+                {
+                    foreach (IFormFile photo in cus.Photos)
+                    {
+                        string uploadFolder = Path.Combine(_hostingEnvironment.WebRootPath, "images");
+                        uniqueFilename = Guid.NewGuid().ToString() + "_" + photo.FileName;
+                        string filePath = Path.Combine(uploadFolder, uniqueFilename);
+                        photo.CopyTo(new FileStream(filePath, FileMode.Create));
+                    }
+                }
+                try
+                {
+                    Customer customer = _customerRepository.GetCustomer(cus.Id);
+                    customer.Name = cus.Name;
+                    customer.Email = cus.Email;
+                    customer.MemberType = cus.membertype;
+                    // remove old image..
+                    if (cus.Photos != null)
+                    {
+                        string OldImagePath = Path.Combine(_hostingEnvironment.WebRootPath, "images", cus.ExistingPhotoPath);
+                        // Delete file
+                        System.IO.File.Delete(OldImagePath);
+                    }
+                    if (uniqueFilename != null)
+                    {
+                        customer.PhotoPath = uniqueFilename;
+                    }
+                    _customerRepository.Update(customer);
+                }
+                catch (Exception e)
+                {
+                    Response.Redirect("error.html");
+                }
+                return RedirectToAction("details", new { id = cus.Id });
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+
     }
 }
