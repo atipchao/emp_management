@@ -38,7 +38,15 @@ namespace emp_management.Models
             Employee emp = context.Employees.Find(Id);
             if (emp != null)
             {
-                context.Employees.Remove(emp);
+                try
+                {
+                    context.Employees.Remove(emp);
+                    context.SaveChanges();
+                }
+                catch
+                {
+
+                }
             }
             return (emp);
 

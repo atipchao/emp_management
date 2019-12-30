@@ -189,8 +189,28 @@ namespace emp_management.Controllers
         [HttpPost]
         public ViewResult Delete(Employee emp)
         {
+
+
             //return RedirectToAction("Index",null);
-            return View();
+            EmpSuccessDeletedViewModel ret_empSuccessDeletedViewModel;
+            try
+            {
+                Employee employee;
+                employee = _employeeRepository.Delete(emp.Id);
+                EmpSuccessDeletedViewModel empSuccessDeletedViewModel = new EmpSuccessDeletedViewModel()
+                {
+                    Employee = employee,
+                    PageTitle = "Emp Delete Successed!"
+                };
+                ret_empSuccessDeletedViewModel = empSuccessDeletedViewModel;
+            }
+            catch
+            {
+                Response.StatusCode = 404;
+                return View("FailDeleteEmployee", emp.Id);
+            }
+
+            return View("EmpSuccessDeleted", ret_empSuccessDeletedViewModel);
         }
     }
 }

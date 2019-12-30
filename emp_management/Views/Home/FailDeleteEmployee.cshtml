@@ -1,0 +1,13 @@
+﻿@model int
+@{
+    ViewBag.Title = "000 Error Fail to delete Emp";
+}
+
+<div class="alert alert-danger mt-1 mb-1">
+    <h4>Error Fail to delete Emp</h4>
+    <hr />
+    <h5>
+        Employee with Id: @Model  fail to delete!
+    </h5>
+</div>
+<a asp-action="index" asp-controller="home" style="width:auto;" class="btn btn-outline-success">Click here to see Emp. list</a>
