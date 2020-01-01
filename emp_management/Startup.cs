@@ -48,6 +48,11 @@ namespace emp_management
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                //app.UseStatusCodePagesWithRedirects("/Errors/{0}"); // this placeholder automatically get the non-success status code OR ..
+                app.UseStatusCodePagesWithReExecute("/Errors/{0}"); // This one returns the correct behaviour as 404 - w/o redirecting page
+            }
 
 
 
