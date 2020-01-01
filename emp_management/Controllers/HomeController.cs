@@ -33,6 +33,7 @@ namespace emp_management.Controllers
 
         public ViewResult Details(int? id)
         {
+            //throw new Exception("Error in details view");
             Employee em = new Employee();
 
             em = _employeeRepository.GetEmployee(id ?? 1);
