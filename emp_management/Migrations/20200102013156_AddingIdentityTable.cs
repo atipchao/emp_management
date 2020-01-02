@@ -69,7 +69,8 @@ namespace emp_management.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUserClaims",
+                name: "AspNetUserC" +
+                "laims",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
