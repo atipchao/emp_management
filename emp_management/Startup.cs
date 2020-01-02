@@ -6,6 +6,7 @@ using emp_management.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,6 +35,8 @@ namespace emp_management
         {
             services.AddDbContextPool<AppDbContext>(opt => opt.UseSqlServer(_config.GetConnectionString("EmpDBConnection")));
             services.AddMvc().AddXmlSerializerFormatters();
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                    .AddEntityFrameworkStores<AppDbContext>();
             //services.AddSingleton<IEmployeeRepository, MockEmployeeRepository>();
             // always use "AddScoped" when connecting to Database server - it pulls new data all the time.
             services.AddScoped<IEmployeeRepository, SQLEmployeeRepository>();
@@ -62,6 +65,7 @@ namespace emp_management
             //app.UseFileServer();
 
             app.UseStaticFiles();
+            app.UseAuthentication();
             app.UseMvcWithDefaultRoute();
 
         }
