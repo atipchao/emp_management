@@ -57,5 +57,12 @@ namespace emp_management.Controllers
             }
             return View(model); // when model not valid, send model back to the view
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("index", "home");
+        }
     }
 }
