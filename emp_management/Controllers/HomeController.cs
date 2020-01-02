@@ -3,6 +3,7 @@ using emp_management.ViewModes;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,17 +16,21 @@ namespace emp_management.Controllers
     {
         private readonly IEmployeeRepository _employeeRepository;
         private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly ILogger logger;
 
-        public HomeController(IEmployeeRepository employeeRepository, IHostingEnvironment hostingEnvironment)
+        public HomeController(IEmployeeRepository employeeRepository, IHostingEnvironment hostingEnvironment, ILogger<HomeController> logger)
         {
+            
             _employeeRepository = employeeRepository;
             _hostingEnvironment = hostingEnvironment;
+            this.logger = logger;
         }
 
         //public JsonResult Index()
 
         public ViewResult Index()
         {
+
             IEnumerable<Employee> employees;
             employees = _employeeRepository.GetAllEmployee();
             return View(employees);
@@ -33,7 +38,14 @@ namespace emp_management.Controllers
 
         public ViewResult Details(int? id)
         {
-            throw new Exception("Error in details view");
+            //throw new Exception("Error in details view");
+            logger.LogTrace("Log Trace");
+            logger.LogDebug("Log Debug");
+            logger.LogInformation("Log Information");
+            logger.LogWarning("Log Warning");
+            logger.LogError("Log Error");
+            logger.LogCritical("Log Critical");
+            //logger.Logn
             Employee em = new Employee();
 
             em = _employeeRepository.GetEmployee(id ?? 1);

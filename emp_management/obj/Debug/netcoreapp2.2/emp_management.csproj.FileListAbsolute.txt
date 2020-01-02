@@ -64,7 +64,7 @@ C:\Users\HPz400\projects\emp_management\emp_management\obj\Debug\netcoreapp2.2\e
 C:\Users\HPz400\projects\emp_management\emp_management\obj\Debug\netcoreapp2.2\emp_management.dll
 C:\Users\HPz400\projects\emp_management\emp_management\obj\Debug\netcoreapp2.2\emp_management.pdb
 C:\Users\HPz400\projects\emp_management\emp_management\obj\Debug\netcoreapp2.2\emp_management.csproj.CopyComplete
-C:\Users\HPz400\projects\emp_management\emp_management\obj\Debug\netcoreapp2.2\emp_management.csprojAssemblyReference.cache
 C:\Users\HPz400\projects\emp_management\emp_management\obj\Debug\netcoreapp2.2\Razor\Views\Shared\NotFound.g.cshtml.cs
 C:\Users\HPz400\projects\emp_management\emp_management\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Error.g.cshtml.cs
 C:\Users\HPz400\projects\emp_management\emp_management\bin\Debug\netcoreapp2.2\nlog.config
+C:\Users\HPz400\projects\emp_management\emp_management\obj\Debug\netcoreapp2.2\emp_management.csprojAssemblyReference.cache
