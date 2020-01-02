@@ -34,6 +34,15 @@ namespace emp_management
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContextPool<AppDbContext>(opt => opt.UseSqlServer(_config.GetConnectionString("EmpDBConnection")));
+
+            //Customize password requirement..
+            services.Configure<IdentityOptions>(options => {
+                options.Password.RequiredLength = 5;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireDigit = false;
+
+            });
             services.AddMvc().AddXmlSerializerFormatters();
             services.AddIdentity<IdentityUser, IdentityRole>()
                     .AddEntityFrameworkStores<AppDbContext>();
