@@ -15,7 +15,7 @@ namespace emp_management.Controllers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser>  signInManager)
+        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         {
             this._userManager = userManager;
             this._signInManager = signInManager;
@@ -49,7 +49,7 @@ namespace emp_management.Controllers
                 }
 
                 // when NOT successful result, we want to loop thru each result
-                foreach(var error in result.Errors)
+                foreach (var error in result.Errors)
                 {
                     // Add them to modelState object
                     ModelState.AddModelError("", error.Description); // This will show up in view in - asp-validation-summary section
@@ -63,6 +63,37 @@ namespace emp_management.Controllers
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("index", "home");
+        }
+
+
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel model)
+        {
+            //First thing, check model-state
+            if (ModelState.IsValid)
+            {
+
+                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("index", "home");
+                }
+
+                // when NOT successful result, we want to loop thru each result
+
+
+                // Add them to modelState object
+                ModelState.AddModelError(string.Empty, "Invalid Login Attemped!"); // This will show up in view in - asp-validation-summary section
+
+            }
+            return View(model); // when model not valid, send model back to the view
         }
     }
 }
