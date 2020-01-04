@@ -88,9 +88,10 @@ namespace emp_management.Controllers
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
                 if (result.Succeeded)
                 {
-                    if (!string.IsNullOrEmpty(returnUrl))
+                    //Add prevent OpenRedirect attacks
+                    if (!string.IsNullOrEmpty(returnUrl) && (Url.IsLocalUrl(returnUrl)))
                     {
-                        return Redirect(returnUrl);
+                        return LocalRedirect(returnUrl);
                     }
                     else
                     {
