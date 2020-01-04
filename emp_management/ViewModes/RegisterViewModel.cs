@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using emp_management.Utilities;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -12,6 +13,7 @@ namespace emp_management.ViewModes
         [Required]
         [EmailAddress]
         [Remote(action:"IsEmailInUse", controller:"Account")]
+        [ValidEmailDomainAttribute(allowedDamain: "gmail.com", ErrorMessage ="Email domain must be Gmail.com")]
         public string Email { get; set; }
         [Required]
         [DataType(DataType.Password)]
