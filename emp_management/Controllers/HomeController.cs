@@ -1,5 +1,6 @@
 ﻿using emp_management.Models;
 using emp_management.ViewModes;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace emp_management.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly IEmployeeRepository _employeeRepository;
@@ -27,6 +29,7 @@ namespace emp_management.Controllers
         }
 
         //public JsonResult Index()
+        
 
         public ViewResult Index()
         {
@@ -66,12 +69,14 @@ namespace emp_management.Controllers
             return View(homeDetailsViewModel);
         }
         [HttpGet]
+        
         public ViewResult Create()
         {
             return View();
         }
 
         [HttpPost]
+        
         //public RedirectToActionResult Create(Employee emp)
         public ActionResult Create(EmpCreateViweModel emp)
         {
@@ -115,6 +120,7 @@ namespace emp_management.Controllers
         }
 
         [HttpGet]
+        
         public ViewResult Edit(int id)
         {
             Employee employee = _employeeRepository.GetEmployee(id);
@@ -130,6 +136,7 @@ namespace emp_management.Controllers
         }
 
         [HttpPost]
+        
         //public RedirectToActionResult Create(Employee emp)
         public ActionResult Edit(EmpEditViewModel emp)
         {

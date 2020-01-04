@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using emp_management.ViewModes;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,6 +21,7 @@ namespace emp_management.Controllers
             this._userManager = userManager;
             this._signInManager = signInManager;
         }
+        [AllowAnonymous]
         // GET: /<controller>/
         [HttpGet]
         public IActionResult Register()
@@ -27,7 +29,7 @@ namespace emp_management.Controllers
             return View();
         }
 
-
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
@@ -59,6 +61,7 @@ namespace emp_management.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
@@ -67,6 +70,7 @@ namespace emp_management.Controllers
 
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Login()
         {
             return View();
@@ -74,6 +78,7 @@ namespace emp_management.Controllers
 
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
             //First thing, check model-state
