@@ -51,7 +51,7 @@ namespace emp_management
                                 .Build();
                 options.Filters.Add(new AuthorizeFilter(policy));
             }).AddXmlSerializerFormatters();
-            services.AddIdentity<IdentityUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole>()
                     .AddEntityFrameworkStores<AppDbContext>();
             //services.AddSingleton<IEmployeeRepository, MockEmployeeRepository>();
             // always use "AddScoped" when connecting to Database server - it pulls new data all the time.

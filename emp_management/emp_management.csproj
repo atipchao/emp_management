@@ -10,6 +10,8 @@
     <Compile Remove="Migrations\20191222220631_addPhotoPath.Designer.cs" />
     <Compile Remove="Migrations\20191222222009_addPhotopath.cs" />
     <Compile Remove="Migrations\20191222222009_addPhotopath.Designer.cs" />
+    <Compile Remove="Migrations\20200104221508_Extened-IdentityUser-add-City.cs" />
+    <Compile Remove="Migrations\20200104221508_Extened-IdentityUser-add-City.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

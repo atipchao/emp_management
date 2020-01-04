@@ -23,5 +23,7 @@ namespace emp_management.ViewModes
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "Password and Confirmation password do not match.")]
         public string ConfirmPassword  { get; set; }
+        [Required]
+        public string City { get; set; }
     }
 }

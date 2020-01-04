@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using emp_management.Models;
 using emp_management.ViewModes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -13,10 +14,10 @@ namespace emp_management.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
             this._userManager = userManager;
             this._signInManager = signInManager;
@@ -53,11 +54,11 @@ namespace emp_management.Controllers
             if (ModelState.IsValid)
             {
                 // crete a new indentity object
-                var user = new IdentityUser
+                var user = new ApplicationUser
                 {
                     UserName = model.Email,
                     Email = model.Email,
-
+                    City = model.City
                 };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
