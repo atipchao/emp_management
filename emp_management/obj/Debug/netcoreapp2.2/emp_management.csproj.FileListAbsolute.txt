@@ -114,3 +114,4 @@ C:\projects\emp_management\emp_management\obj\Debug\netcoreapp2.2\emp_management
 C:\projects\emp_management\emp_management\obj\Debug\netcoreapp2.2\emp_management.pdb
 C:\projects\emp_management\emp_management\obj\Debug\netcoreapp2.2\emp_management.csproj.CopyComplete
 C:\Users\HPz400\projects\emp_management\emp_management\obj\Debug\netcoreapp2.2\Razor\Views\Administration\CreateRole.g.cshtml.cs
+C:\Users\HPz400\projects\emp_management\emp_management\obj\Debug\netcoreapp2.2\Razor\Views\Administration\ListRoles.g.cshtml.cs

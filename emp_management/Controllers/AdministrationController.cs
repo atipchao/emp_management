@@ -35,7 +35,7 @@ namespace emp_management.Controllers
                 IdentityResult result = await _roleManager.CreateAsync(identityRole);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("ListRoles");
                 }
                 // If there's any error ... it will fall down here..
                 foreach (IdentityError err in result.Errors)
@@ -44,6 +44,12 @@ namespace emp_management.Controllers
                 }
             }
             return View(model); 
+        }
+        [HttpGet]
+        public IActionResult ListRoles()
+        {
+            var roles = _roleManager.Roles; 
+            return View(roles);
         }
     }
 }
