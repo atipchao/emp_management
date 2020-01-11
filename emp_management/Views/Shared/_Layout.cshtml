@@ -72,17 +72,20 @@
                         <li><a asp-action="create" asp-controller="home" class="nav-link">Inv. Edit</a></li>
                     </ul>
                 </div>
-                <div class="dropdown">
-                    <button class="btn-dark dropdown-toggle" type="button" data-toggle="dropdown">
-                        Roles
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a asp-action="ListRoles" asp-controller="Administration" class="nav-link">List Roles</a></li>
-                        <li><a asp-action="CreateRole" asp-controller="Administration" class="nav-link">Create Role</a></li>
-                        <li><a asp-action="create" asp-controller="home" class="nav-link">Inv. Edit</a></li>
-                    </ul>
-                </div>
+                @if (signInManager.IsSignedIn(User) && User.IsInRole("admin"))
+                {
+                    <div class="dropdown">
+                        <button class="btn-dark dropdown-toggle" type="button" data-toggle="dropdown">
+                            Roles
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a asp-action="ListRoles" asp-controller="Administration" class="nav-link">List Roles</a></li>
+                            <li><a asp-action="CreateRole" asp-controller="Administration" class="nav-link">Create Role</a></li>
+                            <li><a asp-action="create" asp-controller="home" class="nav-link">Inv. Edit</a></li>
+                        </ul>
+                    </div>
+                }
                 <ul class="navbar-nav ml-auto">
                     @if (signInManager.IsSignedIn(User))
                     {

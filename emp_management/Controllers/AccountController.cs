@@ -126,5 +126,12 @@ namespace emp_management.Controllers
             }
             return View(model); // when model not valid, send model back to the view
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
     }
 }
