@@ -31,6 +31,65 @@ namespace emp_management.Controllers
             return View(users);
         }
 
+        [HttpGet]
+        public async Task< IActionResult> EditUser(string id)
+        {
+            //Get a user from the system
+            var user = await _userManager.FindByIdAsync(id);
+            if(user == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id = {id} can not be found!";
+                return View("NotFound");
+            }
+
+            var UserClaims = await _userManager.GetClaimsAsync(user);
+            var UserRoles = await _userManager.GetRolesAsync(user);
+
+            var model = new EditUserViewModel
+            {
+                Id = user.Id,
+                UserName = user.UserName,
+                Email = user.Email,
+                City = user.City,
+                Claims = UserClaims.Select(s => s.Value).ToList(),
+                Roles = UserRoles.ToList()
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditUser(EditUserViewModel editUserViewModel)
+        {
+            //Get a user from the system
+            var user = await _userManager.FindByIdAsync(editUserViewModel.Id);
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id = {editUserViewModel.Id} can not be found!";
+                return View("NotFound");
+            }
+            else
+            {
+                // Update the User here.. 
+
+                user.Email = editUserViewModel.Email;
+                user.UserName = editUserViewModel.UserName;
+                user.City = editUserViewModel.City;
+
+                var result = await _userManager.UpdateAsync(user);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("ListUsers");
+                }
+                foreach(var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+                return View(editUserViewModel);
+            }
+
+           
+        }
+
 
         [HttpGet]
         public IActionResult CreateRole()
