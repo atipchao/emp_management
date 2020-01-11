@@ -63,8 +63,15 @@ namespace emp_management.Controllers
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("index", "home");
+                    if (_signInManager.IsSignedIn(User) && User.IsInRole("admin"))
+                    {
+                        return RedirectToAction("ListUsers", "Administration");
+                    }
+                    else
+                    {
+                        await _signInManager.SignInAsync(user, isPersistent: false); // This line signs in as the register-user
+                        return RedirectToAction("index", "home");
+                    }
                 }
 
                 // when NOT successful result, we want to loop thru each result

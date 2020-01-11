@@ -24,6 +24,15 @@ namespace emp_management.Controllers
         }
 
         [HttpGet]
+        public IActionResult ListUsers()
+        {
+            //Get all users from the system
+            var users =  _userManager.Users;
+            return View(users);
+        }
+
+
+        [HttpGet]
         public IActionResult CreateRole()
         {
             return View();
