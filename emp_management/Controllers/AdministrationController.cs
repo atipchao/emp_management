@@ -1,5 +1,6 @@
 ﻿using emp_management.Models;
 using emp_management.ViewModes;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace emp_management.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class AdministrationController : Controller
     {
         private readonly RoleManager<IdentityRole> _roleManager;
