@@ -90,6 +90,33 @@ namespace emp_management.Controllers
            
         }
 
+        public async Task<IActionResult> DeleteUser(string id)
+        {
+
+            var user = await _userManager.FindByIdAsync(id);
+
+            if(user == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id = {id} can not be found!";
+                return View("NotFound");
+            }
+            else
+            {
+                var result = await _userManager.DeleteAsync(user);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("ListUser");
+                }
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+
+                return View("ListUser");
+            }
+
+        }
+
 
         [HttpGet]
         public IActionResult CreateRole()
