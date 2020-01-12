@@ -6,10 +6,11 @@
 
 @if (Model.Any())
 {
-    <a class="btn btn-primary mb-3" asp-action="CreateRole" asp-controller="Administration"  style="width:auto">Create Role</a>
+    <a class="btn btn-primary mb-3" asp-action="CreateRole" asp-controller="Administration" style="width:auto">Create Role</a>
 
     foreach (var role in Model)
     {
+
         <div class="card mb-3">
             <div class="card-header">
                 Role Id: @role.Id
@@ -17,10 +18,17 @@
             <div class="card-body">
                 <h5 class="card card-title">@role.Name </h5>
             </div>
-            <div class="card-footer">
-                <a  class="btn btn-primary" asp-action="EditRole" asp-controller="Administration" asp-route-id="@role.Id">Edit</a>
-                <a  class="btn btn-danger" asp-action="DeleteRole" asp-controller="Administration">Delete</a>
-            </div>
+            <form asp-action="DeleteRole" asp-route-id="@role.Id" method="post">
+                <a class="btn btn-primary" asp-action="EditRole" asp-controller="Administration" asp-route-id="@role.Id">Edit</a>
+                <span id="ConfirmDeleteSpan_@role.Id" style="display:none">
+                    <span>Are you sure you want to delete?</span>
+                    <button type="submit" class="btn btn-danger">Yes</button>
+                    <a href="#" class="btn btn-primary" onclick="ConfirmDelete('@role.Id',false)">No</a>
+                </span>
+                <span id="DeleteSpan_@role.Id">
+                    <a href="#" class="btn btn-danger" onclick="ConfirmDelete('@role.Id',true)">Delete</a>
+                </span>
+            </form>
         </div>
     }
 }
@@ -31,12 +39,14 @@ else
             No roles creted yet
         </div>
         <div class="card-body">
-            <h5 class="card-title">Use Button below to crete a role  </h5>
+            <h5 class="card-title">Use Button below to crete a role</h5>
             <a asp-action="CreateRole" asp-controller="Administration" class="btn btn-primary" style="width:auto">Create Role</a>
         </div>
     </div>
 }
 
 
-
+@section Scripts{
+    <script src="~/js/CustomScript.js"></script>
+}
 
