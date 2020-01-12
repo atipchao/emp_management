@@ -23,6 +23,13 @@ namespace emp_management.Models
             base.OnModelCreating(modelBuilder);//Fix: The entity type 'IdentityUserLogin<string>' requires a primary key to be defined. ERROR 
                                                //When runing add-migration adding Identity tables 
             modelBuilder.Seed(2);
+
+            //Set Disable cascade delete.. in FK on every table
+            foreach (var foreignKey in modelBuilder.Model.GetEntityTypes()
+                .SelectMany(e => e.GetForeignKeys()))
+            {
+                foreignKey.DeleteBehavior = DeleteBehavior.Restrict;   
+            }
         }
 
     }
