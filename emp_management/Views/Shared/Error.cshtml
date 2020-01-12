@@ -1,4 +1,7 @@
-﻿<h3>
+﻿@if (ViewBag.ErrorTitle == null)
+{
+
+<h3>
     An Error occured while processing the request. The support team is notified and working on the fix.
 </h3>
 <hr />
@@ -22,3 +25,11 @@
     <hr />
     <p>@ViewBag.StackTrace</p>
 </div>
+}
+else
+{
+    <h1 class="text-danger">@ViewBag.ErrorTitle</h1>
+    <h6 class="text-danger">@ViewBag.ErrorMessage</h6>
+}
+
+
