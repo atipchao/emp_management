@@ -105,14 +105,14 @@ namespace emp_management.Controllers
                 var result = await _userManager.DeleteAsync(user);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("ListUser");
+                    return RedirectToAction("ListUsers");
                 }
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError("", error.Description);
                 }
 
-                return View("ListUser");
+                return View("ListUsers");
             }
 
         }
