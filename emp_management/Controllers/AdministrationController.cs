@@ -341,6 +341,66 @@ namespace emp_management.Controllers
         [HttpGet]
         public async Task<ActionResult> ManageUserRoles(string userId)
         {
+            ViewBag.userId = userId;
+            var user = await _userManager.FindByIdAsync(userId);
+            if(user == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id = {userId} cannot be found..";
+                return View("NotFound");
+            }
+
+            //Get list of the user's roles - List of UserRolesViewModel object
+            var model = new List<UserRolesViewModel>();
+
+            foreach(var role in _roleManager.Roles)
+            {
+                var userRolesViewModel = new UserRolesViewModel
+                {
+                    RoleId = role.Id,
+                    RoleName = role.Name
+                };
+                if(await _userManager.IsInRoleAsync(user, role.Name))
+                {
+                    userRolesViewModel.IsSelected = true;
+                }
+                else
+                {
+                    userRolesViewModel.IsSelected = false;
+                }
+                model.Add(userRolesViewModel);
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> ManageUserRoles(List<UserRolesViewModel> model, string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if(user == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id = {userId} cannot be found..";
+                return View("NotFound");
+            }
+
+            //First, we remove all roles from that user
+            var role = await _userManager.GetRolesAsync(user);
+            var result = await _userManager.RemoveFromRolesAsync(user, role);
+            if (!result.Succeeded)
+            {
+                ModelState.AddModelError("", "Can not remove existing roles");
+                return View(model);
+            }
+
+            // After this. everything is good, re-populate the remaining (selected) roles back to the user  
+            result = await _userManager.AddToRolesAsync(user,
+                        model.Where(s => s.IsSelected).Select(t => t.RoleName));
+
+            if (!result.Succeeded)
+            {
+                ModelState.AddModelError("", "Can not add selected roles to user");
+                return View(model);
+            }
+            return RedirectToAction("EditUser", new {Id = userId });
 
         }
 
