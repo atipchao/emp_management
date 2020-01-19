@@ -124,7 +124,8 @@ namespace emp_management.Controllers
         }
 
 
-
+        [HttpPost]
+        [Authorize(Policy = "DeleteRolePolicy")]
         public async Task<IActionResult> DeleteRole(string id)
         {
 
