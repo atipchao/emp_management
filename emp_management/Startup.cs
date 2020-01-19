@@ -54,13 +54,25 @@ namespace emp_management
             services.AddIdentity<ApplicationUser, IdentityRole>()
                     .AddEntityFrameworkStores<AppDbContext>();
 
-            //Policy 
+            //Claims Policy 
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("DeleteRolePolicy",
                     policy => policy.RequireClaim("Delete Role")
                                     .RequireClaim("Create Role"));
             });
+
+
+            //Roles Policy
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AdminRolePolicy",
+                    policy => policy.RequireClaim("Delete Role")
+//                                    .RequireRole("Admin, "User", "IT"));   
+                                    .RequireRole("Admin"));
+            });
+
+
 
             //services.AddSingleton<IEmployeeRepository, MockEmployeeRepository>();
             // always use "AddScoped" when connecting to Database server - it pulls new data all the time.
