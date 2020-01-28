@@ -58,18 +58,19 @@ namespace emp_management
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("DeleteRolePolicy",
-                    policy => policy.RequireClaim("Delete Role")
-                                    .RequireClaim("Create Role"));
+                    policy => policy.RequireClaim("Delete Role"));                                    
             });
 
-
+            services.AddAuthorization(options =>
+            {
+            options.AddPolicy("EditRolePolicy",
+                policy => policy.RequireClaim("Edit Role"));                                    
+            });
             //Roles Policy
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("AdminRolePolicy",
-                    policy => policy.RequireClaim("Delete Role")
-//                                    .RequireRole("Admin, "User", "IT"));   
-                                    .RequireRole("Admin"));
+            options.AddPolicy("AdminRolePolicy",
+                policy => policy.RequireClaim("Admin"));
             });
 
 

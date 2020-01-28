@@ -200,6 +200,7 @@ namespace emp_management.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "EditRolePolicy")]
         public async Task<IActionResult> EditRole(string id)
         {
             // uses roleId to get role from RoleManagerService 
@@ -230,6 +231,7 @@ namespace emp_management.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = "EditRolePolicy")]
         public async Task<IActionResult> EditRole(EditRoleViewModel model)
         {
 
