@@ -57,7 +57,7 @@ namespace emp_management.Controllers
                 UserName = user.UserName,
                 Email = user.Email,
                 City = user.City,
-                Claims = UserClaims.Select(s => s.Value).ToList(),
+                Claims = UserClaims.Select(s => s.Type + " : " + s.Value).ToList(),
                 Roles = UserRoles.ToList()
             };
             return View(model);
@@ -431,7 +431,8 @@ namespace emp_management.Controllers
 
             //if all is well so far, add the selected claims back to the user
             result = await _userManager.AddClaimsAsync(user,
-                model.Claims.Where(s => s.IsSelected).Select(s => new Claim(s.ClaimType, s.ClaimType)));
+                //model.Claims.Where(s => s.IsSelected).Select(s => new Claim(s.ClaimType, s.ClaimType)));
+                model.Claims.Select(s => new Claim(s.ClaimType, s.IsSelected ? "true" : "false")));
             if (!result.Succeeded)
             {
                 ModelState.AddModelError("", "Can not ADD selected claims back to user");
@@ -463,7 +464,7 @@ namespace emp_management.Controllers
                     ClaimType = claim.Type
                 };
                 //if user has claims, set isSelected Property to true, so the checkbox is checked
-                if(existingUserClaims.Any(s => s.Type == claim.Type))
+                if(existingUserClaims.Any(s => s.Type == claim.Type && s.Value == "true"))
                 {
                     userClaim.IsSelected = true;
                 }

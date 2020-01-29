@@ -62,13 +62,13 @@ namespace emp_management
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("DeleteRolePolicy",
-                    policy => policy.RequireClaim("Delete Role"));                                    
+                    policy => policy.RequireClaim("Delete Role" ));                                    
             });
 
             services.AddAuthorization(options =>
             {
             options.AddPolicy("EditRolePolicy",
-                policy => policy.RequireClaim("Edit Role"));                                    
+                policy => policy.RequireClaim("Edit Role", "true"));     // "true"  value is case sensitive                               
             });
             //Roles Policy
             services.AddAuthorization(options =>
