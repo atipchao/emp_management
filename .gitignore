@@ -1,3 +1,6 @@
 .vs/
 emp_management/bin/
 emp_management/obj/
+.vs/emp_management/v15/.suo
+.vs/emp_management/v15/Server/sqlite3/storage.ide-shm
+.vs/emp_management/v15/Server/sqlite3/storage.ide-wal

@@ -54,6 +54,10 @@ namespace emp_management
             services.AddIdentity<ApplicationUser, IdentityRole>()
                     .AddEntityFrameworkStores<AppDbContext>();
 
+            services.ConfigureApplicationCookie(options => {
+                options.AccessDeniedPath = new PathString("/Administration/AccessDenied");
+            });
+
             //Claims Policy 
             services.AddAuthorization(options =>
             {

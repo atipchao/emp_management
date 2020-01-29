@@ -130,3 +130,4 @@ C:\projects\emp_management\emp_management\obj\Debug\netcoreapp2.2\Razor\Views\Ad
 C:\projects\emp_management\emp_management\obj\Debug\netcoreapp2.2\Razor\Views\Administration\ListUsers.g.cshtml.cs
 C:\projects\emp_management\emp_management\obj\Debug\netcoreapp2.2\Razor\Views\Administration\ManageUserRoles.g.cshtml.cs
 C:\projects\emp_management\emp_management\obj\Debug\netcoreapp2.2\Razor\Views\Administration\ManageUserClaims.g.cshtml.cs
+C:\projects\emp_management\emp_management\obj\Debug\netcoreapp2.2\Razor\Views\Administration\AccessDenied.g.cshtml.cs
