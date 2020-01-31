@@ -64,8 +64,17 @@ namespace emp_management
                 options.AddPolicy("DeleteRolePolicy",
                 policy => policy.RequireClaim("Delete Role" ));
 
+                //options.AddPolicy("EditRolePolicy",
+                //policy => policy.RequireClaim("Edit Role", "true"));     // "true"  value is case sensitive    
+
+                //#99 Custom authorization
                 options.AddPolicy("EditRolePolicy",
-                policy => policy.RequireClaim("Edit Role", "true"));     // "true"  value is case sensitive                               
+                    policy => policy.RequireAssertion(context =>
+                        context.User.IsInRole("Admin") &&
+                        context.User.HasClaim(claim => claim.Type == "Edit Role" && claim.Value == "true") ||
+                        context.User.IsInRole("Super Admin")
+                        ));
+
 
                 options.AddPolicy("AdminRolePolicy",
                 policy => policy.RequireRole("Admin"));
