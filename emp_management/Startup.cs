@@ -62,20 +62,26 @@ namespace emp_management
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("DeleteRolePolicy",
-                    policy => policy.RequireClaim("Delete Role" ));                                    
+                policy => policy.RequireClaim("Delete Role" ));
+
+                options.AddPolicy("EditRolePolicy",
+                policy => policy.RequireClaim("Edit Role", "true"));     // "true"  value is case sensitive                               
+
+                options.AddPolicy("AdminRolePolicy",
+                policy => policy.RequireRole("Admin"));
             });
 
-            services.AddAuthorization(options =>
-            {
-            options.AddPolicy("EditRolePolicy",
-                policy => policy.RequireClaim("Edit Role", "true"));     // "true"  value is case sensitive                               
-            });
-            //Roles Policy
-            services.AddAuthorization(options =>
-            {
-            options.AddPolicy("AdminRolePolicy",
-                policy => policy.RequireClaim("Admin"));
-            });
+            //services.AddAuthorization(options =>
+            //{
+            //options.AddPolicy("EditRolePolicy",
+            //    policy => policy.RequireClaim("Edit Role", "true"));     // "true"  value is case sensitive                               
+            //});
+            ////Roles Policy
+            //services.AddAuthorization(options =>
+            //{
+            //options.AddPolicy("AdminRolePolicy",
+            //    policy => policy.RequireClaim("Admin"));
+            //});
 
 
 

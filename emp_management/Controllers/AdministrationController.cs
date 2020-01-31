@@ -13,7 +13,9 @@ using System.Threading.Tasks;
 
 namespace emp_management.Controllers
 {
-    [Authorize(Roles = "admin")]
+    //[Authorize(Roles = "Admin")]
+    [Authorize(Policy ="AdminRolePolicy")]
+    //AdminRolePolicy
     public class AdministrationController : Controller
     {
         private readonly RoleManager<IdentityRole> _roleManager;
@@ -29,6 +31,7 @@ namespace emp_management.Controllers
             this._logger = logger;
         }
 
+        
         [HttpGet]
         public IActionResult ListUsers()
         {
@@ -37,6 +40,7 @@ namespace emp_management.Controllers
             return View(users);
         }
 
+        //[Authorize(Policy = "AdminRolePolicy")]
         [HttpGet]
         public async Task< IActionResult> EditUser(string id)
         {
@@ -192,6 +196,7 @@ namespace emp_management.Controllers
             }
             return View(model);
         }
+        
         [HttpGet]
         public IActionResult ListRoles()
         {

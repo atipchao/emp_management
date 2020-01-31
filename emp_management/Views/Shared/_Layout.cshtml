@@ -72,7 +72,7 @@
                         <li><a asp-action="create" asp-controller="home" class="nav-link">Inv. Edit</a></li>
                     </ul>
                 </div>
-                @if (signInManager.IsSignedIn(User) && User.IsInRole("admin"))
+                @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                 {
                     <div class="nav-item dropdown">
                         <button class="btn-dark dropdown-toggle" type="button" data-toggle="dropdown">
