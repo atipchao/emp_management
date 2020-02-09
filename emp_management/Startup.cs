@@ -55,6 +55,15 @@ namespace emp_management
             services.AddIdentity<ApplicationUser, IdentityRole>()
                     .AddEntityFrameworkStores<AppDbContext>();
 
+            //#106 Google authentication
+            services.AddAuthentication()
+                .AddGoogle(opt =>
+                {
+                    opt.ClientId = "263174415648-n1a2ild58l6m4c5bmbd4moh5l77usj15.apps.googleusercontent.com";
+                    opt.ClientSecret = "iMnypan_ikKFLVbigj76Up4U";
+                });
+
+
             services.ConfigureApplicationCookie(options => {
                 options.AccessDeniedPath = new PathString("/Administration/AccessDenied");
             });

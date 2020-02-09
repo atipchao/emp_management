@@ -36,7 +36,7 @@ namespace emp_management.Controllers
         public async Task<IActionResult> IsEmailInUse(string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
-            if(user == null)
+            if (user == null)
             {
                 return Json(true);
             }
@@ -95,9 +95,15 @@ namespace emp_management.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult Login()
+        public async Task<IActionResult> Login(string returnUrl)
         {
-            return View();
+            // Here we take care of the External login 
+            LoginViewModel model = new LoginViewModel
+            {
+                ReturnUrl = returnUrl,
+                ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList()
+            };
+            return View(model);
         }
 
 
@@ -121,7 +127,7 @@ namespace emp_management.Controllers
                     {
                         return RedirectToAction("index", "home");
                     }
-                    
+
                 }
 
                 // when NOT successful result, we want to loop thru each result
@@ -139,6 +145,18 @@ namespace emp_management.Controllers
         public IActionResult AccessDenied()
         {
             return View();
+        }
+
+
+        [AllowAnonymous]
+        [HttpPost]
+        public IActionResult ExternalLogin(string provider, string returnUrl)
+        {
+            // Build the re-direct URL 
+            var redirectUrl = Url.Action("EcternalLoginCallback", "Account", new {ReturnUrl = returnUrl});
+
+            var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
+            return new ChallengeResult(provider, properties); // ChallengeResult redirects user to Google login page
         }
     }
 }
