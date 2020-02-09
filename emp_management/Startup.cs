@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using emp_management.Models;
+using emp_management.Security;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -68,13 +69,16 @@ namespace emp_management
                 //policy => policy.RequireClaim("Edit Role", "true"));     // "true"  value is case sensitive    
 
                 //#99 Custom authorization
-                options.AddPolicy("EditRolePolicy",
-                    policy => policy.RequireAssertion(context =>
-                        context.User.IsInRole("Admin") &&
-                        context.User.HasClaim(claim => claim.Type == "Edit Role" && claim.Value == "true") ||
-                        context.User.IsInRole("Super Admin")
-                        ));
+                //options.AddPolicy("EditRolePolicy",
+                //    policy => policy.RequireAssertion(context =>
+                //        context.User.IsInRole("Admin") &&
+                //        context.User.HasClaim(claim => claim.Type == "Edit Role" && claim.Value == "true") ||
+                //        context.User.IsInRole("Super Admin")
+                //        ));
 
+                //#101  Custom policy
+                options.AddPolicy("EditRolePolicy",
+                    policy => policy.AddRequirements(new ManageAdminRolesAndClaimsRequirement()));
 
                 options.AddPolicy("AdminRolePolicy",
                 policy => policy.RequireRole("Admin"));
@@ -99,8 +103,8 @@ namespace emp_management
             services.AddScoped<IEmployeeRepository, SQLEmployeeRepository>();
             services.AddScoped<ICustomerRepository, SQLCustomerRepository>();
 
-            
-
+            //#101 
+            services.AddSingleton<IAuthorizationHandler, CanEditOnlyOtherAdminRolesAndClaimsHandler>();
         }
 
 
