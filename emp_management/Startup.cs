@@ -105,6 +105,8 @@ namespace emp_management
 
             //#101 
             services.AddSingleton<IAuthorizationHandler, CanEditOnlyOtherAdminRolesAndClaimsHandler>();
+            //#102
+            services.AddSingleton<IAuthorizationHandler, SuperAdminHandler>();
         }
 
 
