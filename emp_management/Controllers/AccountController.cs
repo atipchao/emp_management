@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using emp_management.Models;
 using emp_management.ViewModes;
@@ -153,10 +154,73 @@ namespace emp_management.Controllers
         public IActionResult ExternalLogin(string provider, string returnUrl)
         {
             // Build the re-direct URL 
-            var redirectUrl = Url.Action("EcternalLoginCallback", "Account", new {ReturnUrl = returnUrl});
+            var redirectUrl = Url.Action("ExternalLoginCallback", "Account", new {ReturnUrl = returnUrl});
 
             var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
             return new ChallengeResult(provider, properties); // ChallengeResult redirects user to Google login page
+        }
+
+        // ExternalLoginCallback
+        [AllowAnonymous]
+        public async Task<IActionResult> ExternalLoginCallback( string returnUrl = null, string remoteError = null)
+        {
+            returnUrl = returnUrl ?? Url.Content("~/");
+
+            LoginViewModel loginViewModel = new LoginViewModel
+            {
+                ReturnUrl = returnUrl,
+                ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList()
+            };
+            if(remoteError != null)
+            {
+                ModelState.AddModelError(string.Empty, $"Error from external provider: {remoteError}");
+                return View("Login", loginViewModel);
+            }
+
+            var info = await _signInManager.GetExternalLoginInfoAsync();
+            if(info == null)
+            {
+                ModelState.AddModelError(string.Empty, $"Error loading external login information."); // Tell user we can't get any info
+                return View("Login", loginViewModel); // send back to the login view
+            }
+            var signinResult = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider,
+                                                info.ProviderKey, isPersistent: false,
+                                                bypassTwoFactor: true);
+            if (signinResult.Succeeded)
+            {
+                return LocalRedirect(returnUrl);
+            }
+            else
+            {
+                var email = info.Principal.FindFirstValue(ClaimTypes.Email);
+
+                if (email != null)
+                {
+                    var user = await _userManager.FindByEmailAsync(email);
+                    
+                    // if we can't find the user, then we have to create a new user!
+                    if(user == null)
+                    {
+                        user = new ApplicationUser
+                        {
+                            UserName = info.Principal.FindFirstValue(ClaimTypes.Email),
+                            Email = info.Principal.FindFirstValue(ClaimTypes.Email)
+                        };
+                        // create a new local user
+                        await _userManager.CreateAsync(user); // this creates a new record in AspNetUser table
+                    }
+
+                    // Log user into the system.. 
+                    await _userManager.AddLoginAsync(user, info);
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    return LocalRedirect(returnUrl);
+                }
+                // what if we don't receive email returned from Google, we just error out..
+                ViewBag.ErrorTitle = $"Email Claim not recieved from {info.LoginProvider}";
+                ViewBag.ErrorMessage = $"Please contact Support..";
+                return View("Error");
+            }
+            //return View("Login", loginViewModel);
         }
     }
 }
