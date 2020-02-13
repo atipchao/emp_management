@@ -61,6 +61,12 @@ namespace emp_management
                 {
                     opt.ClientId = "263174415648-n1a2ild58l6m4c5bmbd4moh5l77usj15.apps.googleusercontent.com";
                     opt.ClientSecret = "iMnypan_ikKFLVbigj76Up4U";
+                })
+                //#109ASP NET Core facebook authentication
+                .AddFacebook(opt =>
+                {
+                    opt.AppId = "2476087735988049";
+                    opt.ClientSecret = "efa0c6377ffd13c7875a96095cc75a12";
                 });
 
 
